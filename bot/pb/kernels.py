@@ -463,7 +463,7 @@ def _search(cdf, u):
 
 @njit(cache=False)
 def mc_equity(hero, H, board, nb, board_total, deck, U, cdfs, k, n, seed, rule,
-              POP, HIGH, STRAIGHT, CATR):
+              POP, HIGH, STRAIGHT, CATR, dead=0):
     """Monte Carlo equity of the hero hand against k opponents.
 
     cdfs[j] is the cumulative weight vector (length M) of opponent j's range
@@ -480,7 +480,7 @@ def mc_equity(hero, H, board, nb, board_total, deck, U, cdfs, k, n, seed, rule,
     vidx = np.zeros(n, np.int64)
     res_hu = np.zeros(n)
     res_all = np.zeros(n)
-    base = np.int64(0)
+    base = np.int64(dead)  # extra dead cards (e.g. the auction cards left off the flop)
     for i in range(H):
         base |= np.int64(1) << hero[i]
     for i in range(nb):
@@ -548,6 +548,75 @@ def mc_equity(hero, H, board, nb, board_total, deck, U, cdfs, k, n, seed, rule,
             res_all[s] = 1.0 / ties
         vidx[s] = idx0
     return vidx, res_hu, res_all
+
+
+TRIPLES = np.array([[a, b, c] for a in range(5) for b in range(a + 1, 5) for c in range(b + 1, 5)],
+                   np.int64)
+
+
+@njit(cache=False)
+def auction_equities(hero, H, auc, deck, U, cdfs, k, n, seed, rule, TRIPLES,
+                     POP, HIGH, STRAIGHT, CATR):
+    """Hero's pot share on each of the 10 flops the 5 auction cards can make.
+
+    Opponents are sampled once per sample (never holding hero's or any auction
+    card); the turn and river come from the rest of the deck (the two auction
+    cards left off the flop are dead, so no auction card can come later). All
+    ten flops share the same samples, so their differences are low-noise.
+    """
+    np.random.seed(seed)
+    out = np.zeros(10)
+    base = np.int64(0)
+    for i in range(H):
+        base |= np.int64(1) << hero[i]
+    for i in range(5):
+        base |= np.int64(1) << auc[i]
+    vh = np.zeros((k, H), np.int64)
+    buf = np.zeros(MAXC, np.int64)
+    fb = np.zeros(5, np.int64)
+    nd = deck.shape[0]
+    for s in range(n):
+        m = base
+        for j in range(k):
+            tot = cdfs[j, cdfs.shape[1] - 1]
+            idx = 0
+            for _ in range(40):
+                idx = _search(cdfs[j], np.random.random() * tot)
+                ok = True
+                for i in range(H):
+                    if (m >> U[idx, i]) & 1:
+                        ok = False
+                        break
+                if ok:
+                    break
+            for i in range(H):
+                m |= np.int64(1) << U[idx, i]
+                vh[j, i] = U[idx, i]
+        for i in range(3, 5):
+            while True:
+                c = deck[np.random.randint(0, nd)]
+                if not (m >> c) & 1:
+                    break
+            m |= np.int64(1) << c
+            fb[i] = c
+        for t in range(10):
+            for i in range(3):
+                fb[i] = auc[TRIPLES[t, i]]
+            hv = eval_rule(hero, H, fb, 5, rule, buf, POP, HIGH, STRAIGHT, CATR)
+            best = -1
+            ties = 0
+            for j in range(k):
+                vv = eval_rule(vh[j], H, fb, 5, rule, buf, POP, HIGH, STRAIGHT, CATR)
+                if vv > best:
+                    best = vv
+                    ties = 1
+                elif vv == best:
+                    ties += 1
+            if hv > best:
+                out[t] += 1.0
+            elif hv == best:
+                out[t] += 1.0 / (ties + 1)
+    return out / n
 
 
 @njit(cache=False)

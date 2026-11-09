@@ -18,6 +18,7 @@ import time
 import numpy as np
 
 from . import actions as A
+from . import auction as Au
 from . import game as G
 from . import icmtools as I
 from . import postflop as Po
@@ -30,7 +31,9 @@ from .memory import Memory
 
 P = settings.P
 GAME = None
-DEBUG = bool(__import__("os").environ.get("PB_DEBUG"))  # local testing: surface strategy errors
+DEBUG = bool(__import__("os").environ.get("PB_DEBUG")) or __import__("os").path.exists(
+    __import__("os").path.join(__import__("os").path.dirname(__import__("os").path.dirname(__file__)), "PB_DEBUG"))
+# local testing only: env PB_DEBUG=1, or an empty file named PB_DEBUG next to agent.py (never pack it)  # local testing: surface strategy errors
 COST = {"us_per_sample": 0.25, "us_per_opp": 0.12, "scores_us": 90.0}
 DRAW_KEY = 10   # memory cache key offset for the draw flags of a street
 
@@ -200,13 +203,22 @@ def decide(state, memory, sdk, t0=None, params=None):
 
 def _strategy(v, mem, deadline, P, t0=None):
     g = GAME
-    if v.phase != "betting" or not set(v.legal) <= {"fold", "check", "call", "raise"}:
+    if g is not None:
+        # Boston: the auction cards left off the flop are dead for this hand
+        mask = 0
+        for x in getattr(v, "dead_cards", ()):
+            mask |= 1 << int(x)
+        g.extra_dead = mask
+    auction_phase = v.phase == "auction" and "bid" in v.legal
+    if not auction_phase and (v.phase != "betting" or not set(v.legal) <= {"fold", "check", "call", "raise"}):
         return None, None  # unknown phase or action kind: automatic choice
     if g is None or len(v.hole) != g.H or v.hero is None:
-        return _safe_mode(v)
+        return (None, None) if auction_phase else _safe_mode(v)
     opps = {s: St.Opp(mem.stats[mem.slot(s)] if mem.slot(s) >= 0 else None, P) for s in v.players}
     rng = random.Random(V.stable_seed(v.table_id, v.hand_number, len(v.history)))
     c = Pf.Ctx(v, g, opps, P, rng)
+    if auction_phase:
+        return "bid", Au.plan(c, P)
     if v.street == 0 or not v.board:
         return Pf.decide(c)
     # postflop: strength of every hand on each street so far. Only the board is

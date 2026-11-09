@@ -149,7 +149,16 @@ P = {
     "icm_scale": 1.0,                # TUNED multiplier on the ICM risk premium
     "cap_rp_boost": 0.5,             # PRIOR: PLAN "the risk premium grows as the hand cap nears"
     "cap_rp_hands": 40.0,            # ... over the last this-many hands
-    "postflop_icm_allin": True,      # PLAN: every all-in is checked in exact ICM points
+    "postflop_icm_allin": True,
+    # ---- Boston flop auction (pacing knobs from the team's my_bot/auction.py) ----
+    "auction_samples": 120,          # Monte Carlo samples shared by the 10 candidate flops
+    "auction_max_opps": 3,           # opponents simulated (the strongest ranges first)
+    "auction_table_hands": 150,      # hand number by which the balance should be mostly spent
+    "auction_flop_rate": 0.25,       # share of hands (8-handed) that reach an auction with us in it
+    "auction_min_left": 3.0,         # never assume fewer auctions than this remain
+    "auction_ref_stake": 0.03,       # stake (pot x equity edge, in average stacks) earning the paced budget
+    "auction_max_fraction": 0.35,    # most of the balance one auction may spend
+    "auction_min_edge": 0.01,        # below this spread between flops, bid nothing      # PLAN: every all-in is checked in exact ICM points
     # ---- decision details ----
     "mc_samples_min": 80,
     "mc_samples_min_sampled": 30,    # games with >2 hole cards (each sample is costlier)

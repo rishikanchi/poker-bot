@@ -143,6 +143,15 @@ def build_view(state) -> View:
     v.hole = cards_int(_get(state, "cards", ()))
     v.board = cards_int(_get(state, "board", ()))
     v.phase = str(_get(state, "phase", "betting"))
+    # variant-specific public state (Boston: sealed flop auction with flop-chips)
+    var = _get(state, "variant", None)
+    v.var = var if isinstance(var, dict) else {}
+    v.auction_cards = cards_int(v.var.get("auction_cards", ()) or ())
+    on_board = set(v.board)
+    v.dead_cards = [c for c in v.auction_cards if c not in on_board] if v.board else []
+    v.flop_chips = _int(v.var.get("flop_chips", 0))
+    fcs = v.var.get("flop_chips_by_seat", None)
+    v.flop_chips_by_seat = [_int(x) for x in fcs] if isinstance(fcs, (list, tuple)) else []
     v.to_call = _int(_get(state, "to_call", 0))
     v.state_pot = _int(_get(state, "pot", 0))
     v.button = _int(_get(state, "button", -1), -1)

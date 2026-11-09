@@ -40,8 +40,22 @@ def automatic(sdk, v):
     return _make(sdk, FOLD)
 
 
+def bid_action(sdk, v, bids):
+    """Sealed-auction bid: five whole numbers (one per auction card), sum <= balance."""
+    lo, hi = v.legal.get("bid", (0, 0))
+    hi = int(hi or 0)
+    b = [max(0, int(x)) for x in bids][:5]
+    b += [0] * (5 - len(b))
+    while sum(b) > hi and any(b):
+        i = max(range(5), key=lambda j: b[j])
+        b[i] -= min(b[i], sum(b) - hi)
+    return sdk.Action("bid", 0, tuple(int(x) for x in b))
+
+
 def to_action(sdk, v, kind, amount=None):
     legal = v.legal
+    if kind == "bid":
+        return bid_action(sdk, v, amount or ())
     if kind == RAISE:
         if RAISE in legal and amount is not None:
             lo, hi = legal[RAISE]

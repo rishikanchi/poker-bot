@@ -261,8 +261,10 @@ class CommunityCardGame(VariantPlugin):
         return self._pp_val
 
     # -- ranges ---------------------------------------------------------------
+    extra_dead = 0  # set per decision by brain (e.g. dead auction cards); never carried over
+
     def dead_mask(self, cards):
-        m = 0
+        m = int(self.extra_dead)
         for c in cards:
             m |= 1 << int(c)
         return m
@@ -303,6 +305,13 @@ class CommunityCardGame(VariantPlugin):
         return int(K.eval_rule(h, self.H, b, b.shape[0], self.rule, buf,
                                self.POP, self.HIGH, self.STRAIGHT, self.CATR))
 
+    def auction_equities(self, hole, auction, weights, n, seed):
+        """Pot share on each of the 10 flops of the 5 auction cards (kernels.TRIPLES order)."""
+        cdfs = np.cumsum(np.vstack(weights), axis=1)
+        return K.auction_equities(np.asarray(hole, np.int64), self.H, np.asarray(auction, np.int64),
+                                  self.deck, self.U, cdfs, cdfs.shape[0], int(n), int(seed) & 0x7FFFFFFF,
+                                  self.rule, K.TRIPLES, self.POP, self.HIGH, self.STRAIGHT, self.CATR)
+
     def equity(self, hole, board, weights, n, seed):
         """Sampled equity vs the ranges in ``weights`` (list of [M] arrays).
 
@@ -313,7 +322,7 @@ class CommunityCardGame(VariantPlugin):
         b = np.asarray(board, np.int64)
         return K.mc_equity(h, self.H, b, b.shape[0], self.board_total, self.deck, self.U, cdfs,
                            cdfs.shape[0], int(n), int(seed) & 0x7FFFFFFF, self.rule,
-                           self.POP, self.HIGH, self.STRAIGHT, self.CATR)
+                           self.POP, self.HIGH, self.STRAIGHT, self.CATR, np.int64(self.extra_dead))
 
     # -- preflop equity vs a percentile band ------------------------------------
     PRE_XS = np.array([0.02, 0.04, 0.07, 0.10, 0.15, 0.20, 0.30, 0.40, 0.50, 0.65, 0.80, 1.0])
@@ -406,4 +415,5 @@ def warmup():
     g.hand_value(hole, board)
     K.icm_values([100.0, 50.0, 25.0], [50.0, 30.0, 20.0])
     K.hero_values(np.array([[100.0, 50.0, 25.0], [0.0, 150.0, 25.0]]), np.array([50.0, 30.0, 20.0]), 0)
+    g.auction_equities(hole, board[:5], [w], 8, 1)
     return g
