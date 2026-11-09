@@ -1,0 +1,14 @@
+{
+ "cands": {
+  "previous_3bet_settings": {
+   "threebet_conf_z": 0.5,
+   "threebet_eqr_adj": 0.0
+  }
+ },
+ "result": {
+  "previous_3bet_settings": [
+   -0.7138218286211444,
+   0.5587090695309792
+  ]
+ }
+}

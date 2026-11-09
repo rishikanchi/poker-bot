@@ -1,0 +1,27 @@
+gen 0: best 16.20  mean-vector 16.12  original 16.12  fails 0  (57s)
+gen 1: best 15.50  mean-vector 13.20  original 13.81  fails 0  (47s)
+gen 2: best 15.52  mean-vector 13.69  original 13.36  fails 0  (44s)
+gen 3: best 15.70  mean-vector 12.05  original 14.25  fails 0  (46s)
+gen 4: best 13.83  mean-vector 11.85  original 11.85  fails 0  (46s)
+gen 5: best 15.86  mean-vector 15.02  original 14.39  fails 0  (44s)
+gen 6: best 18.34  mean-vector 14.80  original 15.65  fails 0  (44s)
+gen 7: best 16.54  mean-vector 12.27  original 14.67  fails 0  (51s)
+gen 8: best 13.98  mean-vector 12.98  original 13.18  fails 0  (48s)
+gen 9: best 15.79  mean-vector 13.94  original 13.55  fails 0  (46s)
+gen 10: best 16.06  mean-vector 14.04  original 13.47  fails 0  (46s)
+gen 11: best 16.45  mean-vector 13.08  original 13.53  fails 0  (47s)
+{
+ "open_scale": 1.0459,
+ "open_size_bb": 2.1339,
+ "push_fold_bb": 14.7995,
+ "threebet_jam_bb": 25.5225,
+ "fourbet_jam_bb": 41.5796,
+ "icm_scale": 1.5112,
+ "eqr_pre_ip": 0.9214,
+ "eqr_pre_oop": 0.7892,
+ "eqr_oop": 0.8984,
+ "multiway_call_margin": 0.0368,
+ "k_common": 12.2146,
+ "bluff_conf_z": 0.5276,
+ "trap_share": 0.1195
+}

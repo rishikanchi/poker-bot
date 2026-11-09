@@ -1,0 +1,249 @@
+{
+  "mode": "tournament",
+  "tables": 600,
+  "players": 8,
+  "seed": 2026,
+  "lineup": [
+    "bot",
+    "TAG",
+    "LAG",
+    "NashICM",
+    "ValueReg",
+    "Adaptive",
+    "Balanced",
+    "BayesReader"
+  ],
+  "strict_timing": false,
+  "timing": false,
+  "procs": 9,
+  "elapsed_s": 26.928,
+  "tables_per_s": 22.28,
+  "avg_hands_per_table": 139.6,
+  "hand_cap_fraction": 0.0133,
+  "entries": {
+    "bot": {
+      "spec": "bot",
+      "seats": 600,
+      "avg_points": 20.219,
+      "points_stderr": 0.829,
+      "avg_place": 3.575,
+      "win_rate": 0.2467,
+      "itm_rate": 0.5633,
+      "decisions": 80564,
+      "failed": 0,
+      "failures": {
+        "exception": 0,
+        "illegal": 0,
+        "timeout": 0
+      },
+      "failure_rate": 0.0,
+      "timing_ms": {
+        "p50": 0.4135,
+        "p90": 0.7907,
+        "p99": 1.7711,
+        "p99.9": 3.5091,
+        "max": 16.8341,
+        "mean": 0.4668
+      },
+      "min_bank_ms": 100.0,
+      "tracebacks": [],
+      "illegal_examples": []
+    },
+    "ValueReg": {
+      "spec": "valuereg",
+      "seats": 600,
+      "avg_points": 13.898,
+      "points_stderr": 0.699,
+      "avg_place": 4.135,
+      "win_rate": 0.0967,
+      "itm_rate": 0.445,
+      "decisions": 75299,
+      "failed": 0,
+      "failures": {
+        "exception": 0,
+        "illegal": 0,
+        "timeout": 0
+      },
+      "failure_rate": 0.0,
+      "timing_ms": {
+        "p50": 0.0734,
+        "p90": 0.4332,
+        "p99": 0.9396,
+        "p99.9": 1.9651,
+        "max": 178.0028,
+        "mean": 0.1806
+      },
+      "min_bank_ms": 100.0,
+      "tracebacks": [],
+      "illegal_examples": []
+    },
+    "NashICM": {
+      "spec": "nashicm",
+      "seats": 600,
+      "avg_points": 13.12,
+      "points_stderr": 0.71,
+      "avg_place": 4.285,
+      "win_rate": 0.1083,
+      "itm_rate": 0.4133,
+      "decisions": 73147,
+      "failed": 0,
+      "failures": {
+        "exception": 0,
+        "illegal": 0,
+        "timeout": 0
+      },
+      "failure_rate": 0.0,
+      "timing_ms": {
+        "p50": 0.0777,
+        "p90": 0.4588,
+        "p99": 0.9815,
+        "p99.9": 2.0952,
+        "max": 2717.6863,
+        "mean": 0.2267
+      },
+      "min_bank_ms": 100.0,
+      "tracebacks": [],
+      "illegal_examples": []
+    },
+    "TAG": {
+      "spec": "tag",
+      "seats": 600,
+      "avg_points": 11.905,
+      "points_stderr": 0.706,
+      "avg_place": 4.492,
+      "win_rate": 0.1133,
+      "itm_rate": 0.37,
+      "decisions": 70065,
+      "failed": 0,
+      "failures": {
+        "exception": 0,
+        "illegal": 0,
+        "timeout": 0
+      },
+      "failure_rate": 0.0,
+      "timing_ms": {
+        "p50": 0.0816,
+        "p90": 0.4669,
+        "p99": 1.0042,
+        "p99.9": 1.9684,
+        "max": 2729.6623,
+        "mean": 0.2287
+      },
+      "min_bank_ms": 100.0,
+      "tracebacks": [],
+      "illegal_examples": []
+    },
+    "BayesReader": {
+      "spec": "bayes",
+      "seats": 600,
+      "avg_points": 11.633,
+      "points_stderr": 0.746,
+      "avg_place": 4.768,
+      "win_rate": 0.1367,
+      "itm_rate": 0.325,
+      "decisions": 59343,
+      "failed": 0,
+      "failures": {
+        "exception": 0,
+        "illegal": 0,
+        "timeout": 0
+      },
+      "failure_rate": 0.0,
+      "timing_ms": {
+        "p50": 0.0739,
+        "p90": 0.4241,
+        "p99": 0.8758,
+        "p99.9": 1.7202,
+        "max": 8.0573,
+        "mean": 0.1694
+      },
+      "min_bank_ms": 100.0,
+      "tracebacks": [],
+      "illegal_examples": []
+    },
+    "LAG": {
+      "spec": "lag",
+      "seats": 600,
+      "avg_points": 11.3,
+      "points_stderr": 0.738,
+      "avg_place": 4.848,
+      "win_rate": 0.135,
+      "itm_rate": 0.32,
+      "decisions": 65961,
+      "failed": 0,
+      "failures": {
+        "exception": 0,
+        "illegal": 0,
+        "timeout": 0
+      },
+      "failure_rate": 0.0,
+      "timing_ms": {
+        "p50": 0.0792,
+        "p90": 0.4784,
+        "p99": 1.0567,
+        "p99.9": 1.9622,
+        "max": 2735.7485,
+        "mean": 0.3227
+      },
+      "min_bank_ms": 100.0,
+      "tracebacks": [],
+      "illegal_examples": []
+    },
+    "Adaptive": {
+      "spec": "adaptive",
+      "seats": 600,
+      "avg_points": 10.443,
+      "points_stderr": 0.688,
+      "avg_place": 4.645,
+      "win_rate": 0.1067,
+      "itm_rate": 0.32,
+      "decisions": 68162,
+      "failed": 0,
+      "failures": {
+        "exception": 0,
+        "illegal": 0,
+        "timeout": 0
+      },
+      "failure_rate": 0.0,
+      "timing_ms": {
+        "p50": 0.0784,
+        "p90": 0.4751,
+        "p99": 1.0179,
+        "p99.9": 1.9967,
+        "max": 2730.7707,
+        "mean": 0.3112
+      },
+      "min_bank_ms": 100.0,
+      "tracebacks": [],
+      "illegal_examples": []
+    },
+    "Balanced": {
+      "spec": "balanced",
+      "seats": 600,
+      "avg_points": 7.481,
+      "points_stderr": 0.587,
+      "avg_place": 5.252,
+      "win_rate": 0.0567,
+      "itm_rate": 0.2433,
+      "decisions": 57736,
+      "failed": 0,
+      "failures": {
+        "exception": 0,
+        "illegal": 0,
+        "timeout": 0
+      },
+      "failure_rate": 0.0,
+      "timing_ms": {
+        "p50": 0.0766,
+        "p90": 1.6548,
+        "p99": 3.6513,
+        "p99.9": 6.2814,
+        "max": 2642.1286,
+        "mean": 0.6328
+      },
+      "min_bank_ms": 100.0,
+      "tracebacks": [],
+      "illegal_examples": []
+    }
+  }
+}

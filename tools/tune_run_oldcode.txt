@@ -1,0 +1,30 @@
+gen 0: best 25.78  mean-vector 24.76  original 24.76  fails 0  (48s)
+gen 1: best 24.79  mean-vector 24.05  original 23.39  fails 0  (44s)
+gen 2: best 25.26  mean-vector 23.99  original 23.60  fails 0  (44s)
+gen 3: best 25.33  mean-vector 24.73  original 24.28  fails 0  (47s)
+gen 4: best 24.94  mean-vector 23.18  original 23.41  fails 0  (44s)
+gen 5: best 24.63  mean-vector 23.96  original 23.02  fails 0  (44s)
+gen 6: best 26.76  mean-vector 25.84  original 25.67  fails 0  (45s)
+gen 7: best 24.84  mean-vector 24.41  original 24.84  fails 0  (50s)
+gen 8: best 25.79  mean-vector 23.70  original 23.28  fails 0  (55s)
+gen 9: best 26.97  mean-vector 26.97  original 24.97  fails 0  (50s)
+gen 10: best 24.91  mean-vector 23.11  original 23.21  fails 0  (42s)
+gen 11: best 23.34  mean-vector 20.10  original 22.36  fails 0  (41s)
+gen 12: best 25.38  mean-vector 23.49  original 23.59  fails 0  (49s)
+gen 13: best 26.53  mean-vector 25.97  original 25.53  fails 0  (47s)
+{
+ "open_scale": 0.9132,
+ "open_size_bb": 2.2562,
+ "push_fold_bb": 13.2495,
+ "medium_bb": 37.8162,
+ "icm_scale": 0.933,
+ "eqr_pre_ip": 0.8899,
+ "eqr_pre_oop": 0.7315,
+ "eqr_oop": 0.8689,
+ "multiway_call_margin": 0.0331,
+ "flop_big": 0.6954,
+ "later_big": 0.9541,
+ "jam_if_stack_below_pot": 0.6303,
+ "k_common": 9.9767,
+ "bluff_conf_z": 0.3643
+}
