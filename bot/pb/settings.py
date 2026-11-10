@@ -158,6 +158,11 @@ P = {
     "auction_min_left": 3.0,         # never assume fewer auctions than this remain
     "auction_ref_stake": 0.03,       # stake (pot x equity edge, in average stacks) earning the paced budget
     "auction_max_fraction": 0.35,    # most of the balance one auction may spend
+    # ---- self-play tables (train/run.py). Each hook falls back to the logic above when off or out of range ----
+    "use_trained_preflop": False,
+    "use_trained_postflop": False,
+    "use_trained_auction": False,
+    "auction_pay_target": 0.08,      # share of the balance per auction the trained chip price assumes
     "auction_min_edge": 0.01,        # below this spread between flops, bid nothing      # PLAN: every all-in is checked in exact ICM points
     # ---- decision details ----
     "mc_samples_min": 80,

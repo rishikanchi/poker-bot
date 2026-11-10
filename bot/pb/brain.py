@@ -19,6 +19,7 @@ import numpy as np
 
 from . import actions as A
 from . import auction as Au
+from . import trained as Tr
 from . import game as G
 from . import icmtools as I
 from . import postflop as Po
@@ -44,6 +45,12 @@ def init():
     global GAME
     GAME = G.warmup()
     _calibrate(GAME)
+    if any(P.get(k) for k in ("use_trained_preflop", "use_trained_postflop", "use_trained_auction")):
+        try:
+            if Tr.load():
+                Tr.warm(GAME)
+        except Exception:  # noqa: BLE001 - without tables the hooks return None
+            Tr.T = None
     try:
         warm_decisions()
     except Exception:  # noqa: BLE001 - warmup must never stop the import
@@ -218,9 +225,11 @@ def _strategy(v, mem, deadline, P, t0=None):
     rng = random.Random(V.stable_seed(v.table_id, v.hand_number, len(v.history)))
     c = Pf.Ctx(v, g, opps, P, rng)
     if auction_phase:
-        return "bid", Au.plan(c, P)
+        bids = Tr.auction(c, P) if P.get("use_trained_auction") else None
+        return "bid", (bids if bids is not None else Au.plan(c, P))
     if v.street == 0 or not v.board:
-        return Pf.decide(c)
+        got = Tr.preflop(c) if P.get("use_trained_preflop") else None
+        return got if got is not None else Pf.decide(c)
     # postflop: strength of every hand on each street so far. Only the board is
     # removed here (ranges are built as the opponents play them); our own cards
     # are removed afterwards, which is how blockers enter. Cached per hand.
@@ -248,6 +257,10 @@ def _strategy(v, mem, deadline, P, t0=None):
             scores[st], draws[st] = g.scores(b, g.dead_mask(b))
             mem.cache[st], mem.cache[st + DRAW_KEY] = scores[st], draws[st]
     ranges, orders = Rg.build_ranges(v, g, opps, P, scores, draws, g.dead_mask(v.board))
+    if P.get("use_trained_postflop"):
+        got = Tr.postflop(c, ranges, scores[v.street])
+        if got is not None:
+            return got
     c.orders = orders
     c.scores_by_street = scores
     c.draws_by_street = draws
