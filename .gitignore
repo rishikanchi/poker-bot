@@ -3,3 +3,5 @@ __pycache__/
 .pytest_cache/
 .DS_Store
 hand-history/
+train/out/gen1.npz
+train/out/gen2.npz

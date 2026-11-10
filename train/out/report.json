@@ -1,0 +1,1082 @@
+{
+ "config": {
+  "open_first": 0.15,
+  "open_step": 0.05,
+  "eqr_oop": 0.15,
+  "eqr_nut_draw": 0.15,
+  "eqr_weak": 0.15,
+  "kick_min": 9,
+  "tau_post": 0.05,
+  "tau_pre": 0.1,
+  "trim": 0.03,
+  "eps_post": 0.35,
+  "eps_pre": 0.5,
+  "onpolicy": 0.35,
+  "k_post": 40.0,
+  "k_fine": 60.0,
+  "k_pre": 30.0,
+  "k_vf": 30.0,
+  "k_eqr_group": 200.0,
+  "k_eqr_class": 250.0,
+  "eqr_carry": 0.5,
+  "nut_top": 0.12,
+  "lambda0": 0.004,
+  "kappa0": 0.5,
+  "bal_lo": 150.0,
+  "bal_hi": 1000.0,
+  "bal_ref": 600.0,
+  "pay_target": 0.08,
+  "opp_rows": 24,
+  "band_weights": [
+   0.15,
+   0.25,
+   0.3,
+   0.3
+  ]
+ },
+ "args": {
+  "gens": 2,
+  "post": 180000,
+  "pre": 12000000,
+  "procs": 4,
+  "resume": "train/out/gen1.npz",
+  "seed": 2026,
+  "out": "/home/user/poker-bot/train/out",
+  "final": "/home/user/poker-bot/bot/data/trained_holdem.npz"
+ },
+ "generations": [
+  {
+   "generation": 1,
+   "seconds": 700.5,
+   "lambda_used": 0.004,
+   "kappa_used": 0.5,
+   "auction": {
+    "mean_chips_paid": 52.54,
+    "mean_chips_bid": 54.74,
+    "mean_share_of_balance_paid": 0.0905,
+    "paid_nothing": 0.115,
+    "bb_gained_over_default_flop": 0.8815,
+    "pay_buckets": [
+     0.0,
+     0.115,
+     0.118,
+     0.223,
+     0.388,
+     0.156
+    ],
+    "flops_by_stack_band": [
+     0.0,
+     0.146,
+     0.422,
+     0.432
+    ],
+    "pot_type": [
+     0.0,
+     0.834,
+     0.166
+    ],
+    "mean_pot_bb": 7.38,
+    "mean_spr": 6.03,
+    "last_street_with_betting": [
+     0.0,
+     0.584,
+     0.303,
+     0.113
+    ],
+    "heads_up_flop_rate": 0.2378
+   },
+   "eqr_group_oop_ip_by_band_pot": [
+    [
+     [
+      0.85,
+      1.0
+     ],
+     [
+      0.85,
+      1.0
+     ],
+     [
+      0.85,
+      1.0
+     ]
+    ],
+    [
+     [
+      0.85,
+      1.0
+     ],
+     [
+      0.914,
+      1.067
+     ],
+     [
+      0.85,
+      1.0
+     ]
+    ],
+    [
+     [
+      0.85,
+      1.0
+     ],
+     [
+      1.131,
+      0.882
+     ],
+     [
+      0.992,
+      1.005
+     ]
+    ],
+    [
+     [
+      0.85,
+      1.0
+     ],
+     [
+      1.259,
+      0.774
+     ],
+     [
+      1.014,
+      0.986
+     ]
+    ]
+   ],
+   "preflop_unopened": {
+    "<10bb": [
+     {
+      "fold": 0.885,
+      "limp": 0.071,
+      "raise": 0.0,
+      "jam": 0.044
+     },
+     {
+      "fold": 0.877,
+      "limp": 0.096,
+      "raise": 0.0,
+      "jam": 0.027
+     },
+     {
+      "fold": 0.86,
+      "limp": 0.122,
+      "raise": 0.0,
+      "jam": 0.018
+     },
+     {
+      "fold": 0.832,
+      "limp": 0.079,
+      "raise": 0.0,
+      "jam": 0.089
+     },
+     {
+      "fold": 0.799,
+      "limp": 0.064,
+      "raise": 0.0,
+      "jam": 0.137
+     },
+     {
+      "fold": 0.706,
+      "limp": 0.075,
+      "raise": 0.0,
+      "jam": 0.219
+     },
+     {
+      "fold": 0.391,
+      "limp": 0.105,
+      "raise": 0.0,
+      "jam": 0.504
+     }
+    ],
+    "10-20bb": [
+     {
+      "fold": 0.648,
+      "limp": 0.11,
+      "raise": 0.242,
+      "jam": 0.0
+     },
+     {
+      "fold": 0.463,
+      "limp": 0.115,
+      "raise": 0.422,
+      "jam": 0.0
+     },
+     {
+      "fold": 0.286,
+      "limp": 0.136,
+      "raise": 0.576,
+      "jam": 0.002
+     },
+     {
+      "fold": 0.777,
+      "limp": 0.157,
+      "raise": 0.066,
+      "jam": 0.001
+     },
+     {
+      "fold": 0.609,
+      "limp": 0.171,
+      "raise": 0.211,
+      "jam": 0.009
+     },
+     {
+      "fold": 0.426,
+      "limp": 0.185,
+      "raise": 0.376,
+      "jam": 0.013
+     },
+     {
+      "fold": 0.309,
+      "limp": 0.217,
+      "raise": 0.301,
+      "jam": 0.173
+     }
+    ],
+    "20-40bb": [
+     {
+      "fold": 0.634,
+      "limp": 0.134,
+      "raise": 0.232,
+      "jam": 0.0
+     },
+     {
+      "fold": 0.515,
+      "limp": 0.136,
+      "raise": 0.348,
+      "jam": 0.0
+     },
+     {
+      "fold": 0.346,
+      "limp": 0.125,
+      "raise": 0.529,
+      "jam": 0.0
+     },
+     {
+      "fold": 0.783,
+      "limp": 0.181,
+      "raise": 0.036,
+      "jam": 0.0
+     },
+     {
+      "fold": 0.711,
+      "limp": 0.141,
+      "raise": 0.146,
+      "jam": 0.002
+     },
+     {
+      "fold": 0.578,
+      "limp": 0.07,
+      "raise": 0.331,
+      "jam": 0.021
+     },
+     {
+      "fold": 0.24,
+      "limp": 0.069,
+      "raise": 0.631,
+      "jam": 0.06
+     }
+    ],
+    "40+bb": [
+     {
+      "fold": 0.714,
+      "limp": 0.177,
+      "raise": 0.108,
+      "jam": 0.0
+     },
+     {
+      "fold": 0.602,
+      "limp": 0.178,
+      "raise": 0.22,
+      "jam": 0.0
+     },
+     {
+      "fold": 0.46,
+      "limp": 0.162,
+      "raise": 0.377,
+      "jam": 0.0
+     },
+     {
+      "fold": 0.793,
+      "limp": 0.203,
+      "raise": 0.004,
+      "jam": 0.0
+     },
+     {
+      "fold": 0.784,
+      "limp": 0.16,
+      "raise": 0.056,
+      "jam": 0.0
+     },
+     {
+      "fold": 0.729,
+      "limp": 0.071,
+      "raise": 0.199,
+      "jam": 0.0
+     },
+     {
+      "fold": 0.165,
+      "limp": 0.088,
+      "raise": 0.746,
+      "jam": 0.0
+     }
+    ]
+   },
+   "preflop_end": {
+    "everyone_folds": 0.4844,
+    "all_in": 0.2364,
+    "heads_up_flop": 0.2294,
+    "multiway_flop": 0.0498
+   },
+   "post_rows_with_data": 25028,
+   "pre_rows_with_data": 25028
+  },
+  {
+   "generation": 2,
+   "seconds": 403.8,
+   "lambda_used": 0.004359762733593571,
+   "kappa_used": 0.33377568058501994,
+   "auction": {
+    "mean_chips_paid": 121.31,
+    "mean_chips_bid": 125.55,
+    "mean_share_of_balance_paid": 0.2084,
+    "paid_nothing": 0.157,
+    "bb_gained_over_default_flop": 3.0049,
+    "pay_buckets": [
+     0.0,
+     0.157,
+     0.116,
+     0.213,
+     0.146,
+     0.369
+    ],
+    "flops_by_stack_band": [
+     0.038,
+     0.42,
+     0.2,
+     0.341
+    ],
+    "pot_type": [
+     0.128,
+     0.533,
+     0.339
+    ],
+    "mean_pot_bb": 11.41,
+    "mean_spr": 4.08,
+    "last_street_with_betting": [
+     0.0,
+     0.766,
+     0.173,
+     0.06
+    ],
+    "heads_up_flop_rate": 0.166
+   },
+   "eqr_group_oop_ip_by_band_pot": [
+    [
+     [
+      0.66,
+      1.227
+     ],
+     [
+      0.85,
+      1.0
+     ],
+     [
+      0.85,
+      1.0
+     ]
+    ],
+    [
+     [
+      0.541,
+      1.24
+     ],
+     [
+      1.015,
+      0.971
+     ],
+     [
+      0.85,
+      1.0
+     ]
+    ],
+    [
+     [
+      0.113,
+      1.427
+     ],
+     [
+      0.845,
+      1.12
+     ],
+     [
+      0.897,
+      1.102
+     ]
+    ],
+    [
+     [
+      1.468,
+      0.713
+     ],
+     [
+      0.959,
+      1.019
+     ],
+     [
+      0.903,
+      1.081
+     ]
+    ]
+   ],
+   "preflop_unopened": {
+    "<10bb": [
+     {
+      "fold": 0.896,
+      "limp": 0.098,
+      "raise": 0.0,
+      "jam": 0.006
+     },
+     {
+      "fold": 0.873,
+      "limp": 0.105,
+      "raise": 0.0,
+      "jam": 0.022
+     },
+     {
+      "fold": 0.847,
+      "limp": 0.118,
+      "raise": 0.0,
+      "jam": 0.035
+     },
+     {
+      "fold": 0.835,
+      "limp": 0.148,
+      "raise": 0.0,
+      "jam": 0.016
+     },
+     {
+      "fold": 0.752,
+      "limp": 0.132,
+      "raise": 0.0,
+      "jam": 0.117
+     },
+     {
+      "fold": 0.554,
+      "limp": 0.13,
+      "raise": 0.0,
+      "jam": 0.316
+     },
+     {
+      "fold": 0.226,
+      "limp": 0.06,
+      "raise": 0.0,
+      "jam": 0.714
+     }
+    ],
+    "10-20bb": [
+     {
+      "fold": 0.611,
+      "limp": 0.08,
+      "raise": 0.289,
+      "jam": 0.02
+     },
+     {
+      "fold": 0.493,
+      "limp": 0.096,
+      "raise": 0.402,
+      "jam": 0.009
+     },
+     {
+      "fold": 0.385,
+      "limp": 0.07,
+      "raise": 0.529,
+      "jam": 0.015
+     },
+     {
+      "fold": 0.799,
+      "limp": 0.078,
+      "raise": 0.089,
+      "jam": 0.035
+     },
+     {
+      "fold": 0.663,
+      "limp": 0.12,
+      "raise": 0.201,
+      "jam": 0.017
+     },
+     {
+      "fold": 0.506,
+      "limp": 0.085,
+      "raise": 0.349,
+      "jam": 0.06
+     },
+     {
+      "fold": 0.178,
+      "limp": 0.086,
+      "raise": 0.495,
+      "jam": 0.241
+     }
+    ],
+    "20-40bb": [
+     {
+      "fold": 0.955,
+      "limp": 0.033,
+      "raise": 0.012,
+      "jam": 0.0
+     },
+     {
+      "fold": 0.933,
+      "limp": 0.058,
+      "raise": 0.009,
+      "jam": 0.0
+     },
+     {
+      "fold": 0.914,
+      "limp": 0.068,
+      "raise": 0.012,
+      "jam": 0.006
+     },
+     {
+      "fold": 0.871,
+      "limp": 0.076,
+      "raise": 0.05,
+      "jam": 0.003
+     },
+     {
+      "fold": 0.768,
+      "limp": 0.171,
+      "raise": 0.053,
+      "jam": 0.007
+     },
+     {
+      "fold": 0.683,
+      "limp": 0.088,
+      "raise": 0.171,
+      "jam": 0.059
+     },
+     {
+      "fold": 0.407,
+      "limp": 0.129,
+      "raise": 0.17,
+      "jam": 0.294
+     }
+    ],
+    "40+bb": [
+     {
+      "fold": 0.949,
+      "limp": 0.032,
+      "raise": 0.018,
+      "jam": 0.0
+     },
+     {
+      "fold": 0.943,
+      "limp": 0.045,
+      "raise": 0.012,
+      "jam": 0.0
+     },
+     {
+      "fold": 0.933,
+      "limp": 0.055,
+      "raise": 0.012,
+      "jam": 0.0
+     },
+     {
+      "fold": 0.883,
+      "limp": 0.063,
+      "raise": 0.055,
+      "jam": 0.0
+     },
+     {
+      "fold": 0.83,
+      "limp": 0.086,
+      "raise": 0.084,
+      "jam": 0.0
+     },
+     {
+      "fold": 0.783,
+      "limp": 0.052,
+      "raise": 0.165,
+      "jam": 0.0
+     },
+     {
+      "fold": 0.166,
+      "limp": 0.708,
+      "raise": 0.126,
+      "jam": 0.0
+     }
+    ]
+   },
+   "preflop_end": {
+    "everyone_folds": 0.6275,
+    "all_in": 0.1555,
+    "heads_up_flop": 0.1664,
+    "multiway_flop": 0.0505
+   },
+   "post_rows_with_data": 42422,
+   "pre_rows_with_data": 42422
+  },
+  {
+   "generation": 3,
+   "seconds": 392.9,
+   "lambda_used": 0.00852195372034412,
+   "kappa_used": 0.23477304378449812,
+   "auction": {
+    "mean_chips_paid": 37.35,
+    "mean_chips_bid": 39.06,
+    "mean_share_of_balance_paid": 0.0653,
+    "paid_nothing": 0.181,
+    "bb_gained_over_default_flop": 1.5808,
+    "pay_buckets": [
+     0.0,
+     0.181,
+     0.139,
+     0.335,
+     0.215,
+     0.129
+    ],
+    "flops_by_stack_band": [
+     0.129,
+     0.081,
+     0.182,
+     0.608
+    ],
+    "pot_type": [
+     0.802,
+     0.129,
+     0.069
+    ],
+    "mean_pot_bb": 3.97,
+    "mean_spr": 16.89,
+    "last_street_with_betting": [
+     0.0,
+     0.602,
+     0.281,
+     0.117
+    ],
+    "heads_up_flop_rate": 0.2657
+   },
+   "eqr_group_oop_ip_by_band_pot": [
+    [
+     [
+      0.754,
+      1.117
+     ],
+     [
+      0.85,
+      1.0
+     ],
+     [
+      0.85,
+      1.0
+     ]
+    ],
+    [
+     [
+      0.448,
+      1.254
+     ],
+     [
+      1.032,
+      0.951
+     ],
+     [
+      0.85,
+      1.0
+     ]
+    ],
+    [
+     [
+      0.669,
+      1.192
+     ],
+     [
+      0.797,
+      1.188
+     ],
+     [
+      0.893,
+      1.097
+     ]
+    ],
+    [
+     [
+      0.488,
+      1.403
+     ],
+     [
+      0.792,
+      1.174
+     ],
+     [
+      1.038,
+      0.958
+     ]
+    ]
+   ],
+   "preflop_unopened": {
+    "<10bb": [
+     {
+      "fold": 0.806,
+      "limp": 0.033,
+      "raise": 0.0,
+      "jam": 0.161
+     },
+     {
+      "fold": 0.639,
+      "limp": 0.037,
+      "raise": 0.0,
+      "jam": 0.324
+     },
+     {
+      "fold": 0.425,
+      "limp": 0.034,
+      "raise": 0.0,
+      "jam": 0.541
+     },
+     {
+      "fold": 0.597,
+      "limp": 0.029,
+      "raise": 0.0,
+      "jam": 0.374
+     },
+     {
+      "fold": 0.314,
+      "limp": 0.034,
+      "raise": 0.0,
+      "jam": 0.651
+     },
+     {
+      "fold": 0.064,
+      "limp": 0.023,
+      "raise": 0.0,
+      "jam": 0.914
+     },
+     {
+      "fold": 0.054,
+      "limp": 0.06,
+      "raise": 0.0,
+      "jam": 0.885
+     }
+    ],
+    "10-20bb": [
+     {
+      "fold": 0.785,
+      "limp": 0.053,
+      "raise": 0.161,
+      "jam": 0.001
+     },
+     {
+      "fold": 0.809,
+      "limp": 0.086,
+      "raise": 0.103,
+      "jam": 0.002
+     },
+     {
+      "fold": 0.794,
+      "limp": 0.097,
+      "raise": 0.08,
+      "jam": 0.03
+     },
+     {
+      "fold": 0.493,
+      "limp": 0.066,
+      "raise": 0.396,
+      "jam": 0.044
+     },
+     {
+      "fold": 0.243,
+      "limp": 0.071,
+      "raise": 0.617,
+      "jam": 0.068
+     },
+     {
+      "fold": 0.112,
+      "limp": 0.049,
+      "raise": 0.751,
+      "jam": 0.088
+     },
+     {
+      "fold": 0.028,
+      "limp": 0.007,
+      "raise": 0.724,
+      "jam": 0.24
+     }
+    ],
+    "20-40bb": [
+     {
+      "fold": 0.943,
+      "limp": 0.026,
+      "raise": 0.014,
+      "jam": 0.018
+     },
+     {
+      "fold": 0.929,
+      "limp": 0.032,
+      "raise": 0.021,
+      "jam": 0.018
+     },
+     {
+      "fold": 0.886,
+      "limp": 0.025,
+      "raise": 0.03,
+      "jam": 0.059
+     },
+     {
+      "fold": 0.832,
+      "limp": 0.026,
+      "raise": 0.028,
+      "jam": 0.115
+     },
+     {
+      "fold": 0.533,
+      "limp": 0.027,
+      "raise": 0.036,
+      "jam": 0.405
+     },
+     {
+      "fold": 0.158,
+      "limp": 0.03,
+      "raise": 0.247,
+      "jam": 0.565
+     },
+     {
+      "fold": 0.047,
+      "limp": 0.018,
+      "raise": 0.233,
+      "jam": 0.703
+     }
+    ],
+    "40+bb": [
+     {
+      "fold": 0.577,
+      "limp": 0.126,
+      "raise": 0.297,
+      "jam": 0.0
+     },
+     {
+      "fold": 0.409,
+      "limp": 0.122,
+      "raise": 0.469,
+      "jam": 0.0
+     },
+     {
+      "fold": 0.572,
+      "limp": 0.19,
+      "raise": 0.237,
+      "jam": 0.0
+     },
+     {
+      "fold": 0.622,
+      "limp": 0.277,
+      "raise": 0.102,
+      "jam": 0.0
+     },
+     {
+      "fold": 0.479,
+      "limp": 0.363,
+      "raise": 0.158,
+      "jam": 0.0
+     },
+     {
+      "fold": 0.258,
+      "limp": 0.525,
+      "raise": 0.217,
+      "jam": 0.0
+     },
+     {
+      "fold": 0.148,
+      "limp": 0.1,
+      "raise": 0.752,
+      "jam": 0.0
+     }
+    ]
+   },
+   "preflop_end": {
+    "everyone_folds": 0.5126,
+    "all_in": 0.1698,
+    "heads_up_flop": 0.2388,
+    "multiway_flop": 0.0788
+   },
+   "post_rows_with_data": 34704,
+   "pre_rows_with_data": 34704
+  }
+ ],
+ "gen0_preflop": {
+  "<10bb": [
+   {
+    "fold": 0.849,
+    "limp": 0.0,
+    "raise": 0.0,
+    "jam": 0.151
+   },
+   {
+    "fold": 0.796,
+    "limp": 0.0,
+    "raise": 0.0,
+    "jam": 0.204
+   },
+   {
+    "fold": 0.751,
+    "limp": 0.0,
+    "raise": 0.0,
+    "jam": 0.249
+   },
+   {
+    "fold": 0.7,
+    "limp": 0.0,
+    "raise": 0.0,
+    "jam": 0.3
+   },
+   {
+    "fold": 0.649,
+    "limp": 0.0,
+    "raise": 0.0,
+    "jam": 0.351
+   },
+   {
+    "fold": 0.6,
+    "limp": 0.0,
+    "raise": 0.0,
+    "jam": 0.4
+   },
+   {
+    "fold": 0.552,
+    "limp": 0.0,
+    "raise": 0.0,
+    "jam": 0.448
+   }
+  ],
+  "10-20bb": [
+   {
+    "fold": 0.849,
+    "limp": 0.0,
+    "raise": 0.075,
+    "jam": 0.075
+   },
+   {
+    "fold": 0.796,
+    "limp": 0.0,
+    "raise": 0.097,
+    "jam": 0.107
+   },
+   {
+    "fold": 0.751,
+    "limp": 0.0,
+    "raise": 0.127,
+    "jam": 0.122
+   },
+   {
+    "fold": 0.7,
+    "limp": 0.0,
+    "raise": 0.151,
+    "jam": 0.149
+   },
+   {
+    "fold": 0.649,
+    "limp": 0.0,
+    "raise": 0.176,
+    "jam": 0.175
+   },
+   {
+    "fold": 0.6,
+    "limp": 0.0,
+    "raise": 0.204,
+    "jam": 0.196
+   },
+   {
+    "fold": 0.552,
+    "limp": 0.0,
+    "raise": 0.225,
+    "jam": 0.223
+   }
+  ],
+  "20-40bb": [
+   {
+    "fold": 0.849,
+    "limp": 0.0,
+    "raise": 0.151,
+    "jam": 0.0
+   },
+   {
+    "fold": 0.796,
+    "limp": 0.0,
+    "raise": 0.204,
+    "jam": 0.0
+   },
+   {
+    "fold": 0.751,
+    "limp": 0.0,
+    "raise": 0.249,
+    "jam": 0.0
+   },
+   {
+    "fold": 0.7,
+    "limp": 0.0,
+    "raise": 0.3,
+    "jam": 0.0
+   },
+   {
+    "fold": 0.649,
+    "limp": 0.0,
+    "raise": 0.351,
+    "jam": 0.0
+   },
+   {
+    "fold": 0.6,
+    "limp": 0.0,
+    "raise": 0.4,
+    "jam": 0.0
+   },
+   {
+    "fold": 0.552,
+    "limp": 0.0,
+    "raise": 0.448,
+    "jam": 0.0
+   }
+  ],
+  "40+bb": [
+   {
+    "fold": 0.849,
+    "limp": 0.0,
+    "raise": 0.151,
+    "jam": 0.0
+   },
+   {
+    "fold": 0.796,
+    "limp": 0.0,
+    "raise": 0.204,
+    "jam": 0.0
+   },
+   {
+    "fold": 0.751,
+    "limp": 0.0,
+    "raise": 0.249,
+    "jam": 0.0
+   },
+   {
+    "fold": 0.7,
+    "limp": 0.0,
+    "raise": 0.3,
+    "jam": 0.0
+   },
+   {
+    "fold": 0.649,
+    "limp": 0.0,
+    "raise": 0.351,
+    "jam": 0.0
+   },
+   {
+    "fold": 0.6,
+    "limp": 0.0,
+    "raise": 0.4,
+    "jam": 0.0
+   },
+   {
+    "fold": 0.552,
+    "limp": 0.0,
+    "raise": 0.448,
+    "jam": 0.0
+   }
+  ]
+ }
+}
