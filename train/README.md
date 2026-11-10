@@ -91,3 +91,24 @@ computed on the flop the auction selected, with the two dead cards removed.
 * The opponent's bids are not used to narrow ranges before the flop is known,
   only the payment afterwards.
 * No exploits: the spending profile per seat is runtime-only and not built yet.
+
+## Results so far (three generations, 2026-11-10)
+
+Generation 1 used 300,000 flops per postflop pass and 24M preflop hands;
+generations 2 and 3 used 180,000 and 12M to save time. Each table-driven hook
+was then played against the current bot on the starter-kit engine
+(`tools/ab_kit.py`: four copies of each at 8-player tables, 144 tables, real
+1 ms clock, no failed decisions on either side):
+
+| Hook | Points per table vs the current bot | Setting |
+|---|---|---|
+| postflop tables | -2.71 ± 1.11 | off |
+| auction bids | +1.15 ± 1.15 | off (not yet distinguishable from zero) |
+| preflop tables | not played | off |
+
+The preflop table is not usable yet: plain best responses swing from one
+generation to the next (first-to-act opens at 40+ bb went 11% -> 2% -> 30%),
+and generation 3 opens hands like K5o and 87o. `run.py` now moves only half of
+the way to each new estimate from generation 2 on (`damp`), which the first
+three generations did not have. Generations 4 and 5 resumed from `gen3.npz`
+use it.

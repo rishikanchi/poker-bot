@@ -55,6 +55,7 @@ CFG = {
     "k_post": 40.0, "k_fine": 60.0, "k_pre": 30.0, "k_vf": 30.0,   # prior weights (in samples)
     "k_eqr_group": 200.0, "k_eqr_class": 250.0,
     "eqr_carry": 0.5,                            # share of earlier generations' equity-realization samples kept
+    "damp": 0.5,                                 # from generation 2 on, move this share of the way to the new EVs
     "nut_top": 0.12,                             # "the nuts" = strongest 12% of both ranges
     "lambda0": 0.004,                            # big blinds one flop-chip is worth, at the reference balance
     "kappa0": 0.5,                               # share of a flop's worth the opponent model bids
@@ -291,7 +292,7 @@ def run_pre(pool, procs, n, seed):
 POST_SHAPE = (X.NST, X.NPOS, X.NSPR, X.NFAC, X.NCTX, X.NRV, X.NNU, X.NB, X.NA)
 
 
-def update_post(QH, QS, QN, streets, cfg):
+def update_post(QH, QS, QN, streets, cfg, damp=1.0):
     """New EV tables for ``streets``: measured mean shrunk to the previous
     generation; flop cells split by range-vs-range and nut advantage shrink to
     the unsplit cell."""
@@ -308,13 +309,15 @@ def update_post(QH, QS, QN, streets, cfg):
             q[st] = fine
         q[st, ..., X.ANY, X.ANY, :, :] = coarse
     q = q.reshape(X.NROW, X.NA)
+    q = QH + damp * (q - QH)                             # damped: plain best responses swing back and forth
     q[:, 0] = np.where(QH[:, 0] < 0, QH[:, 0], 0.0)     # folding is worth exactly 0
     return q.astype(np.float32)
 
 
-def update_pre(QP, QS, QN, cfg):
+def update_pre(QP, QS, QN, cfg, damp=1.0):
     k = cfg["k_pre"]
     q = (QS + k * QP) / (QN + k)
+    q = QP + damp * (q - QP)
     q[:, 0] = 0.0
     return q.astype(np.float32)
 
@@ -456,13 +459,14 @@ def main():
         t0 = time.time()
         G["P"] = params(cfg, lam, kappa, g > 1)
         seed = a.seed + 100000 * g
+        damp = 1.0 if g == 1 else cfg["damp"]
         # A: turn + river
         QS, QN, *_ = with_pool(run_post, a.post, seed + 1, 1, 2)
-        G["QH"] = update_post(G["QH"], QS, QN, (1, 2), cfg)
+        G["QH"] = update_post(G["QH"], QS, QN, (1, 2), cfg, damp)
         ta = time.time() - t0
         # B: flop, played through the new turn / river tables
         QS, QN, VFS, VFN, EQS, EQE, EQN, PAYC, AST = with_pool(run_post, a.post, seed + 2, 0, 0)
-        G["QH"] = update_post(G["QH"], QS, QN, (0,), cfg)
+        G["QH"] = update_post(G["QH"], QS, QN, (0,), cfg, damp)
         G["VFH"] = update_vf(G["VFH"], VFS, VFN, cfg)
         new = np.stack([EQS, EQE, EQN])
         eq_acc = new if eq_acc is None else cfg["eqr_carry"] * eq_acc + new
@@ -471,7 +475,7 @@ def main():
         tb = time.time() - t0 - ta
         # C: preflop from equity x measured equity realization
         QS, QN, kinds = with_pool(run_pre, a.pre, seed + 3)
-        G["QP"] = update_pre(G["QP"], QS, QN, cfg)
+        G["QP"] = update_pre(G["QP"], QS, QN, cfg, damp)
         # auction: opponent-model scale and the price of a flop-chip
         asum = auction_summary(AST)
         n = max(AST[0], 1.0)
